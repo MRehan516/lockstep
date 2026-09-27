@@ -1,0 +1,44 @@
+{
+  "run_id": "run-section10",
+  "expected_conflicts": 1,
+  "description": "PRD Section 10 scenario — guaranteed true positive. Task 1 changes calculateShipping signature; Task 2 reads it.",
+  "tasks": [
+    {
+      "task_id": "task-1-signature-change",
+      "subagent_id": "agent-alpha",
+      "description": "Add a required `region` parameter to calculateShipping() and update every existing call site in main.py and mcp_server.py to pass it.",
+      "files": [
+        "galaxium/shipping.py",
+        "galaxium/main.py",
+        "galaxium/mcp_server.py"
+      ],
+      "symbols_touched": [
+        {
+          "name": "calculateShipping",
+          "kind": "function",
+          "access_type": "signature_change"
+        }
+      ]
+    },
+    {
+      "task_id": "task-2-new-endpoint",
+      "subagent_id": "agent-beta",
+      "description": "Add a new getShippingEstimate() endpoint that calls calculateShipping() to return a shipping cost estimate.",
+      "files": [
+        "galaxium/main.py"
+      ],
+      "symbols_touched": [
+        {
+          "name": "getShippingEstimate",
+          "kind": "function",
+          "access_type": "write"
+        },
+        {
+          "name": "calculateShipping",
+          "kind": "function",
+          "access_type": "read"
+        }
+      ]
+    }
+  ]
+}

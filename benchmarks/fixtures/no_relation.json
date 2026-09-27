@@ -1,0 +1,25 @@
+{
+  "run_id": "bench-no-relation",
+  "expected_conflicts": 0,
+  "description": "Two tasks touching entirely different symbols — no conflict expected.",
+  "tasks": [
+    {
+      "task_id": "t-no-rel-a",
+      "subagent_id": "agent-a",
+      "description": "Add a new get_available_destinations helper.",
+      "files": ["galaxium/shipping.py"],
+      "symbols_touched": [
+        { "name": "get_available_destinations", "kind": "function", "access_type": "write" }
+      ]
+    },
+    {
+      "task_id": "t-no-rel-b",
+      "subagent_id": "agent-b",
+      "description": "Update database connection helper.",
+      "files": ["galaxium/database.py"],
+      "symbols_touched": [
+        { "name": "get_connection", "kind": "function", "access_type": "write" }
+      ]
+    }
+  ]
+}

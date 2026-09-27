@@ -1,0 +1,25 @@
+{
+  "run_id": "bench-resource-conflict",
+  "expected_conflicts": 1,
+  "description": "Two tasks both write to the same migration file — resource conflict expected.",
+  "tasks": [
+    {
+      "task_id": "t-migrate-a",
+      "subagent_id": "agent-a",
+      "description": "Add region column to orders table via migration.",
+      "files": ["galaxium/alembic/versions/0001_initial.py"],
+      "symbols_touched": [
+        { "name": "galaxium/alembic/versions/0001_initial.py", "kind": "migration_file", "access_type": "write" }
+      ]
+    },
+    {
+      "task_id": "t-migrate-b",
+      "subagent_id": "agent-b",
+      "description": "Rename destination column in same migration file.",
+      "files": ["galaxium/alembic/versions/0001_initial.py"],
+      "symbols_touched": [
+        { "name": "galaxium/alembic/versions/0001_initial.py", "kind": "migration_file", "access_type": "write" }
+      ]
+    }
+  ]
+}

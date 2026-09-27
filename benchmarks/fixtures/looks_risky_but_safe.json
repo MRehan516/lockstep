@@ -1,0 +1,25 @@
+{
+  "run_id": "bench-looks-risky-but-safe",
+  "expected_conflicts": 0,
+  "description": "Two tasks both read the same symbol — no conflict because neither writes.",
+  "tasks": [
+    {
+      "task_id": "t-read-a",
+      "subagent_id": "agent-a",
+      "description": "Read calculateShipping to produce a cost report.",
+      "files": ["galaxium/main.py"],
+      "symbols_touched": [
+        { "name": "calculateShipping", "kind": "function", "access_type": "read" }
+      ]
+    },
+    {
+      "task_id": "t-read-b",
+      "subagent_id": "agent-b",
+      "description": "Read calculateShipping to validate pricing logic.",
+      "files": ["galaxium/mcp_server.py"],
+      "symbols_touched": [
+        { "name": "calculateShipping", "kind": "function", "access_type": "read" }
+      ]
+    }
+  ]
+}

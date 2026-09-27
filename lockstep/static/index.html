@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lockstep — Pre-Flight Conflict Guard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/ui/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <span class="topbar-title">LOCKSTEP</span>
+    <span class="topbar-sub">Pre-Flight Conflict Guard</span>
+    <span class="topbar-status" id="ws-status">● disconnected</span>
+  </header>
+
+  <div class="run-bar">
+    <label class="run-label" for="run-id-input">RUN ID</label>
+    <input id="run-id-input" class="run-input" type="text" placeholder="run-section10" />
+    <button id="load-btn" class="btn">Load</button>
+    <button id="post-btn" class="btn btn-primary">Submit Plan JSON</button>
+    <input id="plan-file" type="file" accept=".json" style="display:none" />
+  </div>
+
+  <div class="workspace">
+    <!-- Left pane: task list -->
+    <aside class="pane pane-tasks" id="pane-tasks">
+      <div class="pane-header">TASKS</div>
+      <div id="task-list" class="task-list">
+        <div class="empty-state">Load a run to see tasks.</div>
+      </div>
+    </aside>
+
+    <!-- Centre pane: dependency graph -->
+    <main class="pane pane-graph" id="pane-graph">
+      <div class="pane-header">DEPENDENCY GRAPH</div>
+      <svg id="graph-svg" width="100%" height="100%"></svg>
+    </main>
+
+    <!-- Right pane: detail panel -->
+    <aside class="pane pane-detail" id="pane-detail">
+      <div class="pane-header">DETAIL</div>
+      <div id="detail-content" class="detail-content">
+        <div class="empty-state">Select a task or conflict.</div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="/ui/app.js"></script>
+</body>
+</html>
